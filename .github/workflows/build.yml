@@ -1,0 +1,38 @@
+name: Build Card
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/family-dashboard-card.ts'
+      - 'rollup.config.js'
+      - 'package.json'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Build card
+        run: npx rollup -c
+        
+      - name: Commit built file
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add family-dashboard-card.js
+          git diff --staged --quiet || git commit -m "chore: build family-dashboard-card.js [skip ci]"
+          git push
