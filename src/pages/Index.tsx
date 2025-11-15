@@ -123,24 +123,6 @@ const Index = () => {
         <div className="mx-auto max-w-5xl">
           <HouseholdCard people={householdMembers} />
         </div>
-
-        {/* Info Section */}
-        <div className="mx-auto mt-12 max-w-3xl">
-          <div className="grid gap-6 sm:grid-cols-3">
-            <div className="rounded-lg bg-card/50 p-4 text-center backdrop-blur-sm">
-              <div className="mb-2 text-3xl font-bold text-primary">3</div>
-              <div className="text-sm text-muted-foreground">Familjemedlemmar</div>
-            </div>
-            <div className="rounded-lg bg-card/50 p-4 text-center backdrop-blur-sm">
-              <div className="mb-2 text-3xl font-bold text-status-home">2</div>
-              <div className="text-sm text-muted-foreground">Hemma nu</div>
-            </div>
-            <div className="rounded-lg bg-card/50 p-4 text-center backdrop-blur-sm">
-              <div className="mb-2 text-3xl font-bold text-status-away">1</div>
-              <div className="text-sm text-muted-foreground">Borta</div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
