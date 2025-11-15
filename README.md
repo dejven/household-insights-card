@@ -1,73 +1,96 @@
-# Welcome to your Lovable project
+# Family Dashboard Card för Home Assistant
 
-## Project info
+![Version](https://img.shields.io/github/v/release/YOUR_USERNAME/family-dashboard-card)
+![HACS](https://img.shields.io/badge/HACS-Custom-orange.svg)
+![License](https://img.shields.io/github/license/YOUR_USERNAME/family-dashboard-card)
 
-**URL**: https://lovable.dev/projects/ff57b63b-64e6-4cf2-8a0e-6be0d2013ab4
+En vacker och funktionell Lovelace custom card för Home Assistant som visar familjemedlemmar med deras realtidsstatus, plats, enheter och aktivitetsdata.
 
-## How can I edit this code?
+## ✨ Funktioner
 
-There are several ways of editing your application.
+- 📍 **Realtidsposition** - Se var alla familjemedlemmar befinner sig
+- 🔋 **Batteristatus** - Håll koll på batterinivå för alla enheter
+- 👟 **Aktivitetsdata** - Visa steg, puls och annan hälsodata
+- 📱 **Enhetsöversikt** - Se alla enheter per person och deras status
+- 🎨 **Vacker design** - Modern glassmorphism design med animationer
+- 📱 **Responsiv** - Fungerar perfekt på mobil, tablet och desktop
+- 🌙 **Tema-stöd** - Följer automatiskt Home Assistants ljusa/mörka tema
 
-**Use Lovable**
+## 🚀 Installation
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/ff57b63b-64e6-4cf2-8a0e-6be0d2013ab4) and start prompting.
+### HACS (Rekommenderat)
 
-Changes made via Lovable will be committed automatically to this repo.
+1. Öppna HACS i Home Assistant
+2. Gå till "Frontend"
+3. Klicka på de tre prickarna (⋮) i övre högra hörnet
+4. Välj "Custom repositories"
+5. Lägg till URL: `https://github.com/YOUR_USERNAME/family-dashboard-card`
+6. Välj kategori: "Lovelace"
+7. Klicka på "INSTALL"
+8. Starta om Home Assistant
 
-**Use your preferred IDE**
+### Manuell Installation
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+1. Ladda ner `family-dashboard-card.js` från [senaste release](https://github.com/YOUR_USERNAME/family-dashboard-card/releases)
+2. Kopiera filen till `config/www/family-dashboard-card.js`
+3. Lägg till resurs i Home Assistant (Settings → Dashboards → Resources)
+4. Starta om Home Assistant
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## ⚙️ Konfiguration
 
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```yaml
+type: custom:family-dashboard-card
+title: Family Dashboard
+description: Håll koll på var alla är och hur de mår
+entities:
+  - person: person.anna
+    device_trackers:
+      - device_tracker.anna_iphone
+      - device_tracker.anna_watch
+    step_sensor: sensor.anna_steps
+    battery_sensor: sensor.anna_iphone_battery
+    heart_rate_sensor: sensor.anna_heart_rate
+  - person: person.erik
+    device_trackers:
+      - device_tracker.erik_iphone
+    step_sensor: sensor.erik_steps
 ```
 
-**Edit a file directly in GitHub**
+### Konfigurationsalternativ
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+| Alternativ | Typ | Obligatorisk | Beskrivning |
+|------------|-----|--------------|-------------|
+| `type` | string | **Ja** | Måste vara `custom:family-dashboard-card` |
+| `title` | string | Nej | Kortets rubrik (standard: "Family Dashboard") |
+| `description` | string | Nej | Beskrivning under rubriken |
+| `entities` | array | **Ja** | Lista med familjemedlemmar |
 
-**Use GitHub Codespaces**
+### Person-konfiguration
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+| Alternativ | Typ | Beskrivning |
+|------------|-----|-------------|
+| `person` | string | **Obligatorisk** - Person entity ID |
+| `device_trackers` | array | Lista med device tracker entity IDs |
+| `step_sensor` | string | Sensor för stegräknare |
+| `battery_sensor` | string | Sensor för batterinivå |
+| `heart_rate_sensor` | string | Sensor för hjärtfrekvens |
 
-## What technologies are used for this project?
+## 🔧 Utveckling
 
-This project is built with:
+### Setup
+```bash
+git clone https://github.com/YOUR_USERNAME/family-dashboard-card.git
+cd family-dashboard-card
+npm install
+npm run build
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+För mer information, se [info.md](info.md).
 
-## How can I deploy this project?
+## 📄 Licens
 
-Simply open [Lovable](https://lovable.dev/projects/ff57b63b-64e6-4cf2-8a0e-6be0d2013ab4) and click on Share -> Publish.
+MIT License
 
-## Can I connect a custom domain to my Lovable project?
+---
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+**Gjord med ❤️ för Home Assistant-communityt**
