@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Home, MapPin, Clock } from "lucide-react";
+import { MapPin, Clock, Battery, Footprints } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export type PersonStatus = "home" | "away" | "unknown";
@@ -13,11 +13,12 @@ export interface Person {
   status: PersonStatus;
   location?: string;
   lastSeen: string;
+  steps?: number;
+  batteryLevel?: number;
 }
 
 interface HouseholdCardProps {
   people: Person[];
-  homeAddress?: string;
   className?: string;
 }
 
@@ -43,7 +44,14 @@ const getStatusText = (status: PersonStatus) => {
   }
 };
 
-export const HouseholdCard = ({ people, homeAddress, className }: HouseholdCardProps) => {
+const getBatteryColor = (level?: number) => {
+  if (!level) return "text-muted-foreground";
+  if (level > 50) return "text-status-home";
+  if (level > 20) return "text-yellow-500";
+  return "text-destructive";
+};
+
+export const HouseholdCard = ({ people, className }: HouseholdCardProps) => {
   const homeCount = people.filter((p) => p.status === "home").length;
   const totalCount = people.length;
 
@@ -56,27 +64,6 @@ export const HouseholdCard = ({ people, homeAddress, className }: HouseholdCardP
       )}
     >
       <div className="p-6">
-        {/* Header */}
-        <div className="mb-6 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="rounded-full bg-primary/10 p-3">
-              <Home className="h-6 w-6 text-primary" />
-            </div>
-            <div>
-              <h2 className="text-2xl font-bold text-foreground">Mitt Hushåll</h2>
-              {homeAddress && (
-                <p className="flex items-center gap-1 text-sm text-muted-foreground">
-                  <MapPin className="h-3 w-3" />
-                  {homeAddress}
-                </p>
-              )}
-            </div>
-          </div>
-          <Badge variant="secondary" className="text-base font-semibold">
-            {homeCount}/{totalCount} hemma
-          </Badge>
-        </div>
-
         {/* People Grid */}
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {people.map((person) => (
@@ -126,6 +113,20 @@ export const HouseholdCard = ({ people, homeAddress, className }: HouseholdCardP
                     <span className="truncate">{person.location}</span>
                   </div>
                 )}
+                <div className="flex items-center gap-3">
+                  {person.batteryLevel !== undefined && (
+                    <div className="flex items-center gap-1">
+                      <Battery className={cn("h-3 w-3", getBatteryColor(person.batteryLevel))} />
+                      <span className={getBatteryColor(person.batteryLevel)}>{person.batteryLevel}%</span>
+                    </div>
+                  )}
+                  {person.steps !== undefined && (
+                    <div className="flex items-center gap-1">
+                      <Footprints className="h-3 w-3" />
+                      <span>{person.steps.toLocaleString('sv-SE')} steg</span>
+                    </div>
+                  )}
+                </div>
                 <div className="flex items-center gap-1">
                   <Clock className="h-3 w-3" />
                   <span>{person.lastSeen}</span>

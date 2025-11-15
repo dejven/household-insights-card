@@ -12,6 +12,8 @@ const Index = () => {
       avatar: person1,
       status: "home",
       lastSeen: "Aktiv nu",
+      steps: 8542,
+      batteryLevel: 85,
     },
     {
       id: "2",
@@ -20,6 +22,8 @@ const Index = () => {
       status: "away",
       location: "Kontoret",
       lastSeen: "Sedan 08:30",
+      steps: 12234,
+      batteryLevel: 45,
     },
     {
       id: "3",
@@ -27,6 +31,8 @@ const Index = () => {
       avatar: person3,
       status: "home",
       lastSeen: "5 min sedan",
+      steps: 3421,
+      batteryLevel: 92,
     },
   ];
 
@@ -53,7 +59,7 @@ const Index = () => {
         </div>
 
         <div className="mx-auto max-w-5xl">
-          <HouseholdCard people={householdMembers} homeAddress="Storgatan 12, Stockholm" />
+          <HouseholdCard people={householdMembers} />
         </div>
 
         {/* Info Section */}
