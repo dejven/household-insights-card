@@ -14,6 +14,27 @@ const Index = () => {
       lastSeen: "Aktiv nu",
       steps: 8542,
       batteryLevel: 85,
+      devices: [
+        { name: "iPhone 15 Pro", type: "phone", battery: 85, charging: false },
+        { name: "Apple Watch Ultra", type: "watch", battery: 72, charging: false },
+      ],
+      activity: {
+        steps: 8542,
+        stepGoal: 10000,
+        calories: 420,
+        calorieGoal: 600,
+        activeMinutes: 45,
+        activeGoal: 60,
+      },
+      heartRate: {
+        current: 72,
+        resting: 58,
+      },
+      recentLocations: [
+        { place: "Hemma", time: "Nu", duration: "Sedan 17:30" },
+        { place: "ICA Maxi", time: "16:45", duration: "25 min" },
+        { place: "Gymmet", time: "15:00", duration: "1h 15min" },
+      ],
     },
     {
       id: "2",
@@ -24,6 +45,27 @@ const Index = () => {
       lastSeen: "Sedan 08:30",
       steps: 12234,
       batteryLevel: 45,
+      devices: [
+        { name: "Samsung Galaxy S24", type: "phone", battery: 45, charging: false },
+        { name: "Galaxy Watch 6", type: "watch", battery: 38, charging: false },
+      ],
+      activity: {
+        steps: 12234,
+        stepGoal: 12000,
+        calories: 580,
+        calorieGoal: 700,
+        activeMinutes: 72,
+        activeGoal: 90,
+      },
+      heartRate: {
+        current: 68,
+        resting: 62,
+      },
+      recentLocations: [
+        { place: "Kontoret", time: "Nu", duration: "Sedan 08:30" },
+        { place: "Pressbyrån", time: "12:15", duration: "5 min" },
+        { place: "Hemma", time: "07:45", duration: "45 min" },
+      ],
     },
     {
       id: "3",
@@ -33,6 +75,26 @@ const Index = () => {
       lastSeen: "5 min sedan",
       steps: 3421,
       batteryLevel: 92,
+      devices: [
+        { name: "iPhone 14", type: "phone", battery: 92, charging: true },
+        { name: "Apple Watch SE", type: "watch", battery: 85, charging: false },
+      ],
+      activity: {
+        steps: 3421,
+        stepGoal: 8000,
+        calories: 180,
+        calorieGoal: 400,
+        activeMinutes: 22,
+        activeGoal: 45,
+      },
+      heartRate: {
+        current: 65,
+        resting: 60,
+      },
+      recentLocations: [
+        { place: "Hemma", time: "Nu", duration: "Sedan 15:30" },
+        { place: "Skolan", time: "08:00", duration: "7h 15min" },
+      ],
     },
   ];
 

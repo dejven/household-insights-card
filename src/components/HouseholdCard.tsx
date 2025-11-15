@@ -1,10 +1,34 @@
+import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { MapPin, Clock, Battery, Footprints } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { PersonDetailDialog } from "@/components/PersonDetailDialog";
 
 export type PersonStatus = "home" | "away" | "unknown";
+
+export interface Device {
+  name: string;
+  type: string;
+  battery: number;
+  charging: boolean;
+}
+
+export interface Activity {
+  steps: number;
+  stepGoal: number;
+  calories: number;
+  calorieGoal: number;
+  activeMinutes: number;
+  activeGoal: number;
+}
+
+export interface RecentLocation {
+  place: string;
+  time: string;
+  duration?: string;
+}
 
 export interface Person {
   id: string;
@@ -15,6 +39,13 @@ export interface Person {
   lastSeen: string;
   steps?: number;
   batteryLevel?: number;
+  devices?: Device[];
+  activity?: Activity;
+  recentLocations?: RecentLocation[];
+  heartRate?: {
+    current?: number;
+    resting?: number;
+  };
 }
 
 interface HouseholdCardProps {
@@ -52,8 +83,15 @@ const getBatteryColor = (level?: number) => {
 };
 
 export const HouseholdCard = ({ people, className }: HouseholdCardProps) => {
+  const [selectedPerson, setSelectedPerson] = useState<Person | null>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
   const homeCount = people.filter((p) => p.status === "home").length;
   const totalCount = people.length;
+
+  const handlePersonClick = (person: Person) => {
+    setSelectedPerson(person);
+    setDialogOpen(true);
+  };
 
   return (
     <Card
@@ -69,9 +107,10 @@ export const HouseholdCard = ({ people, className }: HouseholdCardProps) => {
           {people.map((person) => (
             <div
               key={person.id}
+              onClick={() => handlePersonClick(person)}
               className={cn(
                 "group relative rounded-lg bg-secondary/50 p-4 transition-all duration-300",
-                "hover:bg-secondary/70 hover:shadow-lg"
+                "hover:bg-secondary/70 hover:shadow-lg cursor-pointer"
               )}
             >
               <div className="flex items-start gap-3">
@@ -139,6 +178,13 @@ export const HouseholdCard = ({ people, className }: HouseholdCardProps) => {
 
       {/* Decorative gradient overlay */}
       <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/5 to-transparent opacity-50" />
+
+      {/* Person Detail Dialog */}
+      <PersonDetailDialog 
+        person={selectedPerson} 
+        open={dialogOpen} 
+        onOpenChange={setDialogOpen} 
+      />
     </Card>
   );
 };
