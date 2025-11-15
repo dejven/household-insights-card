@@ -8,7 +8,7 @@ const dev = process.env.ROLLUP_WATCH;
 export default {
   input: 'src/family-dashboard-card.ts',
   output: {
-    file: 'dist/family-dashboard-card.js',
+    file: 'family-dashboard-card.js',
     format: 'es',
     sourcemap: dev ? true : false,
   },

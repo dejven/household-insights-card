@@ -1,6 +1,6 @@
 {
   "name": "Family Dashboard Card",
-  "content_in_root": false,
+  "content_in_root": true,
   "filename": "family-dashboard-card.js",
   "render_readme": true,
   "homeassistant": "2023.1.0"
